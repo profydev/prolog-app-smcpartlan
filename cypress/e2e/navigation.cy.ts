@@ -29,6 +29,24 @@ describe("Sidebar Navigation", () => {
       cy.get("nav")
         .contains("Settings")
         .should("have.attr", "href", "/dashboard/settings");
+
+      // test for window.open
+    });
+
+    it("buttons are working", () => {
+      cy.visit("http://localhost:3000/dashboard", {
+        onBeforeLoad(win) {
+          cy.stub(win, "open").as("winOpen");
+        },
+      });
+
+      cy.get("nav").contains("Support").click();
+
+      cy.get("@winOpen").should("be.called");
+      cy.get("@winOpen").should(
+        "be.calledWith",
+        "mailto:support@prolog-app.com?subject=Support Request",
+      );
     });
 
     it("is collapsible", () => {
@@ -82,7 +100,7 @@ describe("Sidebar Navigation", () => {
       // check that all links are rendered
       cy.get("nav").find("a").should("have.length", 5);
 
-      // Support button should be rendered but Collapse button not
+      // Support button should be rendered but Ctollapse button not
       cy.get("nav").contains("Support").should("exist");
       cy.get("nav").contains("Collapse").should("not.be.visible");
 
