@@ -20,7 +20,7 @@ export function SidebarNavigation() {
   const router = useRouter();
   const { isSidebarCollapsed, toggleSidebar } = useContext(NavigationContext);
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [mobileForm, setMobileForm] = useState(false);
+  const [isMobileForm, setMobileForm] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -50,7 +50,7 @@ export function SidebarNavigation() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={
-              isSidebarCollapsed && !mobileForm
+              isSidebarCollapsed && !isMobileForm
                 ? "/icons/logo-small.svg"
                 : "/icons/logo-large.svg"
             }
