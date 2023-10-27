@@ -13,6 +13,7 @@ describe("Project List", () => {
 
     // wait for request to resolve
     cy.wait("@getProjects");
+    cy.get("main").find("img").should("be.visible");
   });
 
   context("desktop resolution", () => {
