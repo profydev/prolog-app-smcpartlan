@@ -46,5 +46,43 @@ describe("Project List", () => {
             .should("have.attr", "href", "/dashboard/issues");
         });
     });
+
+    it("displays error", () => {
+      // set network error for test
+      cy.intercept("GET", "https://prolog-api.profy.dev/project", {
+        statusCode: 500,
+        body: "",
+      }).as("getProjectsError");
+
+      // set page and wait on callout
+      cy.visit("http://localhost:3000/dashboard");
+      cy.wait("@getProjectsError");
+
+      // confirm elements rendered on error are showing
+      cy.get('[data-cy="error"]').should("be.visible");
+      cy.get('[data-cy="retry"').should("be.visible");
+    });
+
+    it("reloads data when try again button clicked", () => {
+      // set  network error stub for try again button to be rendered
+      cy.intercept("GET", "https://prolog-api.profy.dev/project", {
+        statusCode: 500,
+        body: "",
+      }).as("getProjectsError");
+
+      // set page and wait on callout
+      cy.visit("http://localhost:3000/dashboard");
+      cy.wait("@getProjectsError");
+
+      // set mock projects data for retry
+      cy.intercept("GET", "https://prolog-api.profy.dev/project", {
+        fixture: "projects.json",
+      }).as("retryGetProjects");
+
+      // click retry button and confim rendered correctly.
+      cy.get('[data-cy="retry"]').click();
+      cy.wait("@retryGetProjects");
+      cy.get("main").find("img").should("be.visible");
+    });
   });
 });

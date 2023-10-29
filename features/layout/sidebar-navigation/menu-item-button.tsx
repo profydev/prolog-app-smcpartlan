@@ -23,10 +23,10 @@ export function MenuItemButton({
       <Button className={styles.anchor} onClick={onClick}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          className={styles.icon}
+          className={isCollapsed ? styles.iconRight : styles.icon}
           src={iconSrc}
           alt={`${text} icon`}
-          style={{ transform: isCollapsed ? "rotate(180deg)" : "" }}
+          // style={{ transform: isCollapsed ? "rotate(180deg)" : "" }}
         />{" "}
         {!isCollapsed && text}{" "}
       </Button>
