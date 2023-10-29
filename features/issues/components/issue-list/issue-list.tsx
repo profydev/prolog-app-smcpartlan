@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { ProjectLanguage } from "@api/projects.types";
 import { useGetProjects } from "@features/projects";
-import { useGetIssues } from "../../api/use-get-issues";
+import { useGetIssues } from "@features/issues";
 import { IssueRow } from "./issue-row";
 import styles from "./issue-list.module.scss";
 
