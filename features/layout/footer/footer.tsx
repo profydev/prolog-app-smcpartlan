@@ -6,9 +6,9 @@ export function Footer() {
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        <p className={styles.version}>
+        <div className={styles.version}>
           Version: {currentVersion.version.trim()}
-        </p>
+        </div>
         <div className={styles.linksContainer}>
           <a className={styles.link} href="#">
             Docs
