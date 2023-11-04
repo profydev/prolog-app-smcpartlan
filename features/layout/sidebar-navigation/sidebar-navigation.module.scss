@@ -57,6 +57,9 @@
 }
 
 .menuButton {
+  background-color: color.$gray-900;
+  border: none;
+
   @media (min-width: breakpoint.$desktop) {
     display: none;
   }
@@ -125,6 +128,7 @@
   list-style: none;
   padding: 0;
   margin: 0;
+  background: none;
 }
 
 .linkList {

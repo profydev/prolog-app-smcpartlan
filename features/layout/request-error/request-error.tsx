@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./request-error.module.scss";
-import { Button } from "../../ui/button";
 import { RequestErrorRetry } from "@api/error.types";
 
 interface RequestErrorProps {
@@ -20,7 +19,7 @@ export function RequestError({ retryMethod }: RequestErrorProps) {
           There was a problem while loading the project data
         </div>
         <div className={styles.actionContainter}>
-          <Button
+          <button
             className={styles.tryAgainButton}
             onClick={retryMethod}
             data-cy="retry"
@@ -33,7 +32,7 @@ export function RequestError({ retryMethod }: RequestErrorProps) {
                 alt="Try Again"
               />
             </div>
-          </Button>
+          </button>
         </div>
       </div>
     </div>
