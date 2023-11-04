@@ -58,10 +58,14 @@
 }
 
 .tryAgainButton {
+  cursor: pointer;
   display: flex;
   align-items: flex-start;
-  border-radius: 8px;
+
+  // border-radius: 8px;
   color: color.$error-700;
+  border: none;
+  background: inherit;
 }
 
 .tryAgainButtonBase {

@@ -3,9 +3,7 @@ import { useContext, useState, useEffect } from "react";
 import { Routes } from "@config/routes";
 import classNames from "classnames";
 import { NavigationContext } from "./navigation-context";
-import { MenuItemButton } from "./menu-item-button";
 import { MenuItemLink } from "./menu-item-link";
-import { Button } from "@features/ui";
 import styles from "./sidebar-navigation.module.scss";
 
 const menuItems = [
@@ -57,17 +55,6 @@ export function SidebarNavigation() {
             alt="logo"
             className={styles.logo}
           />
-          <Button
-            onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
-            className={styles.menuButton}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={isMobileMenuOpen ? "/icons/close.svg" : "/icons/menu.svg"}
-              alt={isMobileMenuOpen ? "close menu" : "open menu"}
-              className={styles.menuIcon}
-            />
-          </Button>
         </header>
         <div
           className={classNames(
@@ -87,28 +74,35 @@ export function SidebarNavigation() {
                 key={index}
                 {...menuItem}
                 isCollapsed={isSidebarCollapsed}
+                iconReversable={false}
                 isActive={router.pathname === menuItem.href}
               />
             ))}
           </ul>
           <ul className={styles.list}>
-            <MenuItemButton
+            <MenuItemLink
               text="Support"
               iconSrc="/icons/support.svg"
               isCollapsed={isSidebarCollapsed}
-              onClick={() =>
-                window.open(
-                  "mailto:support@prolog-app.com?subject=Support Request",
-                )
-              }
+              iconReversable={false}
+              href="mailto:support@prolog-app.com?subject=Support Request"
+              isActive={false}
             />
-            <MenuItemButton
-              text="Collapse"
-              iconSrc="/icons/arrow-left.svg"
-              isCollapsed={isSidebarCollapsed}
-              onClick={() => toggleSidebar()}
-              className={styles.collapseMenuItem}
-            />
+            <div
+              onClick={() => {
+                toggleSidebar(), setMobileMenuOpen(!isMobileMenuOpen);
+              }}
+            >
+              <MenuItemLink
+                text="Collapse"
+                iconSrc="/icons/arrow-left.svg"
+                isCollapsed={isSidebarCollapsed}
+                iconReversable={true}
+                href=""
+                isActive={false}
+                className={styles.collapseMenuItem}
+              />
+            </div>
           </ul>
         </nav>
       </div>
