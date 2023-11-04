@@ -40,13 +40,13 @@ describe("Sidebar Navigation", () => {
         },
       });
 
-      cy.get("nav").contains("Support").click();
-
-      cy.get("@winOpen").should("be.called");
-      cy.get("@winOpen").should(
-        "be.calledWith",
-        "mailto:support@prolog-app.com?subject=Support Request",
-      );
+      cy.get("nav")
+        .contains("Support")
+        .should(
+          "have.attr",
+          "href",
+          "mailto:support@prolog-app.com?subject=Support Request",
+        );
     });
 
     it("is collapsible", () => {
@@ -54,7 +54,7 @@ describe("Sidebar Navigation", () => {
       cy.get("nav").contains("Collapse").click();
 
       // check that links still exist and are functionable
-      cy.get("nav").find("a").should("have.length", 5).eq(1).click();
+      cy.get("nav").find("a").should("have.length", 7).eq(1).click();
       cy.url().should("eq", "http://localhost:3000/dashboard/issues");
 
       // check that text is not rendered
@@ -91,21 +91,21 @@ describe("Sidebar Navigation", () => {
       isNotInViewport("nav");
 
       // open mobile navigation
-      cy.get("img[alt='open menu']").click();
+      cy.get(`[data-cy="openMenu"]`).click();
 
       // wait for animation to finish
       cy.wait(500);
       isInViewport("nav");
 
       // check that all links are rendered
-      cy.get("nav").find("a").should("have.length", 5);
+      cy.get("nav").find("a").should("have.length", 7);
 
-      // Support button should be rendered but Ctollapse button not
+      // Support button should be rendered but Collapse button not
       cy.get("nav").contains("Support").should("exist");
       cy.get("nav").contains("Collapse").should("not.be.visible");
 
       // close mobile navigation and check that it disappears
-      cy.get("img[alt='close menu']").click();
+      cy.get(`[data-cy="closeMenu"]`).click();
       cy.wait(500);
       isNotInViewport("nav");
     });

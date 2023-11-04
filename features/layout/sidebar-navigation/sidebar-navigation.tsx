@@ -55,6 +55,20 @@ export function SidebarNavigation() {
             alt="logo"
             className={styles.logo}
           />
+
+          {/* Need to fix the below */}
+          <button
+            onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
+            className={styles.menuButton}
+            data-cy={isMobileMenuOpen ? "closeMenu" : "openMenu"}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={isMobileMenuOpen ? "/icons/close.svg" : "/icons/menu.svg"}
+              alt={isMobileMenuOpen ? "close menu" : "open menu"}
+              className={styles.menuIcon}
+            />
+          </button>
         </header>
         <div
           className={classNames(

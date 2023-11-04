@@ -57,6 +57,9 @@
 }
 
 .menuButton {
+  background-color: color.$gray-900;
+  border: none;
+
   @media (min-width: breakpoint.$desktop) {
     display: none;
   }
